@@ -1,0 +1,20 @@
+<div class="col-md-4" ng-controller="LoginCtrl">
+  <h1>Login</h1>
+  <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+  <form name="loginForm" class="form" ng-submit="loginForm.$valid && loginUser(user)" novalidate>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" name="username" ng-model="user.username" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+        <input type="password" class="form-control" name="password" ng-model="user.password" required>
+      </div>
+      <label>Remember Me
+        <input type="checkbox" ng-model="user.remember_me">
+      </label><br/>
+      <div>
+        <button type="submit" class="btn btn-default" ng-disabled="!loginForm.$valid">Login</button>
+      </div>
+  </form>
+</div>

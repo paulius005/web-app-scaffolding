@@ -1,0 +1,149 @@
+repository: http://raw.githubusercontent.com/paulius005/app-scaffolding/master/templates/
+prompts:
+  - appName
+  - appDescription
+bower:
+  - jquery
+  - jquery-ui
+  - bootstrap
+  - font-awesome
+  - angular
+  - angular-bootstrap
+  - angular-route
+  - angular-ui-sortable
+  - lodash
+  - mousetrap
+npm:
+  - express
+  - cookie-parser
+  - body-parser
+  - sequelize
+  - sequelize-cli
+  - mysql
+  - jade
+  - passport
+  - passport-local
+  - passport-remember-me
+  - path
+  - node-uuid
+  - node-gyp
+  - bcrypt
+structure:
+  .bowermap: repo://bowermap
+  .jshintrc: repo://jshintrc
+  .gitignore: repo://gitignore
+  .sequelizerc: repo://sequelizerc
+  package.json: repo://package.json
+  bower.json: repo://bower.json
+  README.md: repo://README.md
+  app:
+    index.html: repo://angular/index.html
+    js:
+      app.js: repo://angular/app.js
+      controllers.js: repo://angular/controllers.js
+    less:
+      app.less: 'h1 { color: red }'
+    partials:
+      index.html: repo://angular/partials/index.html
+      login.html: repo://angular/partials/login.html
+      profile.html: repo://angular/partials/profile.html
+      register.html: repo://angular/partials/register.html
+  server:
+    server.js: repo://express/server.js
+    auth.js: repo://express/auth.js
+    routes.js: repo://express/routes.js
+    controllers:
+      users_controller.js: repo://express/controllers/users_controller.js
+    db:
+      models:
+        user.js: repo://express/db/models/user.js
+        token.js: repo://express/db/models/token.js
+      columns.js: repo://express/db/columns.js
+      index.js: repo://express/db/index.js
+      config:
+        config.json: repo://express/db/config/config.json
+grunt:
+  config:
+    jshint:
+      all:
+        - 'app/js/**/*.js'
+    less:
+      app:
+        files:
+          - src: 'app/less/**/*.less'
+            dest: www-root/css/app.css
+    copy:
+      app:
+        files:
+          - expand: true
+            cwd: app
+            src: '**/*.html'
+            dest: www-root
+    concat:
+      app:
+        files:
+          - src: 'app/js/**/*.js'
+            dest: www-root/js/app.js
+    uglify:
+      app:
+        files:
+          - src: www-root/js/app.js
+            dest: www-root/js/app.min.js
+    watch:
+      appJs:
+        files: ['app/js/**/*.js']
+        tasks: ['concat']
+      appLess:
+        files: ['app/less/**/*.less']
+        tasks: ['less']
+      appHtml:
+        files: ['app/**/*.html']
+        tasks: ['copy']
+    bowermap:
+      app_css:
+        options:
+          filter: '.css$'
+        dest: www-root/css/vendor.min.css
+        packages:
+          - bootstrap
+          - font-awesome
+      app_js:
+        options:
+          filter: '.js$'
+        dest: www-root/js/vendor.min.js
+        packages:
+          - jquery
+          - jquery-ui
+          - angular
+          - angular-bootstrap
+          - angular-route
+          - angular-ui-sortable
+          - lodash
+          - mousetrap
+      app_fonts:
+        options:
+          mode: copy
+          filter: '^fonts'
+        dest: www-root/
+        packages:
+          - font-awesome
+    concurrent:
+      dev:
+        - nodemon
+        - watch
+      options:
+        logConcurrentOutput: true
+    nodemon:
+      app:
+        script: server/server.js
+        options:
+          watch: [server]
+          env:
+            PORT: 3000
+            NODE_ENV: 'dev'
+  tasks:
+    bower: [bowermap]
+    build: [less, concat, copy]
+    test: [jshint]
+    dist: [bower, test, build, uglify]
+    default: [build, concurrent]

@@ -1,0 +1,12 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "node_api",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "migrationStorage": "json",
+    "migrationStoragePath": "./sequelize-meta.json",
+    "autoMigrateOldSchema": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "<%= slugify(appName) %>",
+  "version": "0.0.0",
+  "description": "<%= appDescription %>",
+  "authors": [
+    "Paulius Dragunas <pdragunas@gmail.com>"
+  ]
+}
