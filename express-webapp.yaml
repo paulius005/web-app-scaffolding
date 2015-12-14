@@ -1,4 +1,4 @@
-repository: http://raw.githubusercontent.com/paulius005/app-scaffolding/master/templates/
+repository: http://raw.githubusercontent.com/paulius005/web-app-scaffolding/master/templates/
 prompts:
   - appName
   - appDescription
@@ -9,12 +9,14 @@ bower:
   - font-awesome
   - angular
   - angular-bootstrap
+  - angular-cookies
   - angular-route
   - angular-ui-sortable
   - lodash
   - mousetrap
 npm:
   - express
+  - express-session
   - cookie-parser
   - body-parser
   - sequelize
@@ -140,7 +142,7 @@ grunt:
           watch: [server]
           env:
             PORT: 3000
-            NODE_ENV: 'dev'
+            NODE_ENV: 'development'
   tasks:
     bower: [bowermap]
     build: [less, concat, copy]
