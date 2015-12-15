@@ -14,8 +14,8 @@ app.set('views', __dirname + '/views');
 app.use(express.static('www-root'));
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
